@@ -36,7 +36,7 @@ public class Datos {
 					String informacionAdicional = campos[2];
 					String fechaIngreso = campos[3];
 					Producto producto = new Producto(nombre, precio, informacionAdicional, fechaIngreso);
-					Producto.agregarAlInventario(producto);
+					Inventario.agregarAlInventario(producto);
 				}
 			}
 			System.out.println("Inventario cargado desde el archivo CSV.");

@@ -1,2 +1,6 @@
-package org.example;public class Rol {
+package org.example;
+
+public enum Rol {
+    ADMINISTRADOR,
+    GESTOR_DE_VENTAS
 }

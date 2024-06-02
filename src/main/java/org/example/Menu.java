@@ -4,39 +4,63 @@ import java.util.Scanner;
 
 public class Menu {
     public static void mostrarMenu(Usuario usuario) {
+        Inventario.inicializarInventario();
+
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
         while (!salir) {
             System.out.println("\n1. Agregar Producto");
             System.out.println("2. Eliminar Producto");
+            System.out.println("3. Mostrar Inventario");
             if (usuario.getRol() == Rol.ADMINISTRADOR) {
-                System.out.println("3. Agregar Vendedor");
-                System.out.println("4. Eliminar Vendedor");
+                System.out.println("4. Agregar Vendedor");
+                System.out.println("5. Eliminar Vendedor");
+                System.out.println("6. Salir");
+            } else {
+                System.out.println("4. Salir");
             }
-            System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine();  // Consume newline
+            int opcion;
+            try {
+                opcion = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Por favor, ingrese un número válido.");
+                continue;
+            }
 
             switch (opcion) {
                 case 1:
                     System.out.print("Nombre del producto: ");
                     String nombre = scanner.nextLine();
-                    System.out.print("Precio del producto: ");
-                    double precio = scanner.nextDouble();
-                    scanner.nextLine();  // Consume newline
+                    String precioStr;
+                    double precio = 0;
+                    boolean precioValido = false;
+                    while (!precioValido) {
+                        System.out.print("Precio del producto: ");
+                        precioStr = scanner.nextLine();
+                        if (Validacion.validarPrecio(precioStr)) {
+                            precio = Double.parseDouble(precioStr);
+                            precioValido = true;
+                        } else {
+                            System.out.println("Error: Por favor, ingrese un número válido para el precio.");
+                        }
+                    }
                     System.out.print("Información adicional del producto: ");
                     String info = scanner.nextLine();
-                    Producto.agregarProducto(nombre, precio, info);
+                    Producto producto = Producto.crearProducto(nombre, precio, info);
+                    Inventario.agregarProducto(producto);
                     break;
                 case 2:
                     System.out.print("Nombre del producto a eliminar: ");
                     String nombreEliminar = scanner.nextLine();
-                    Producto.eliminarProducto(nombreEliminar);
+                    Inventario.eliminarProducto(nombreEliminar);
                     break;
                 case 3:
+                    Inventario.mostrarInventario();
+                    break;
+                case 4:
                     if (usuario.getRol() == Rol.ADMINISTRADOR) {
                         System.out.print("Nombre del nuevo vendedor: ");
                         String nombreVendedor = scanner.nextLine();
@@ -45,10 +69,10 @@ public class Menu {
                         Login.agregarUsuario(new Usuario(nombreVendedor, contrasenaVendedor, Rol.GESTOR_DE_VENTAS));
                         System.out.println("Vendedor agregado con éxito.");
                     } else {
-                        System.out.println("Opción no válida.");
+                        salir = true;
                     }
                     break;
-                case 4:
+                case 5:
                     if (usuario.getRol() == Rol.ADMINISTRADOR) {
                         System.out.print("Nombre del vendedor a eliminar: ");
                         String nombreVendedorEliminar = scanner.nextLine();
@@ -58,13 +82,19 @@ public class Menu {
                         System.out.println("Opción no válida.");
                     }
                     break;
-                case 5:
-                    salir = true;
+                case 6:
+                    if (usuario.getRol() == Rol.ADMINISTRADOR) {
+                        salir = true;
+                    } else {
+                        System.out.println("Opción no válida.");
+                    }
                     break;
                 default:
                     System.out.println("Opción no válida.");
                     break;
             }
         }
+
+        scanner.close();
     }
 }
