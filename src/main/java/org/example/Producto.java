@@ -1,8 +1,5 @@
 package org.example;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Producto {
 	private String nombre;
 	private double precio;
@@ -40,10 +37,5 @@ public class Producto {
 				", informacionAdicional='" + informacionAdicional + '\'' +
 				", fechaIngreso='" + fechaIngreso + '\'' +
 				'}';
-	}
-
-	public static Producto crearProducto(String nombre, double precio, String informacionAdicional) {
-		String fechaIngreso = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		return new Producto(nombre, precio, informacionAdicional, fechaIngreso);
 	}
 }

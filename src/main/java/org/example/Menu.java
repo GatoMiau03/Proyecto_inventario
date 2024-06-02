@@ -1,11 +1,12 @@
 package org.example;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Menu {
     public static void mostrarMenu(Usuario usuario) {
-        Inventario.inicializarInventario();
-
+        Inventario.cargarInventario();  // Cargar inventario al inicio
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 
@@ -49,7 +50,8 @@ public class Menu {
                     }
                     System.out.print("Información adicional del producto: ");
                     String info = scanner.nextLine();
-                    Producto producto = Producto.crearProducto(nombre, precio, info);
+                    String fechaIngreso = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                    Producto producto = new Producto(nombre, precio, info, fechaIngreso);
                     Inventario.agregarProducto(producto);
                     break;
                 case 2:

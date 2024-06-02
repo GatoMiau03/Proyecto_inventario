@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
 
 public class Datos {
 
@@ -36,7 +37,7 @@ public class Datos {
 					String informacionAdicional = campos[2];
 					String fechaIngreso = campos[3];
 					Producto producto = new Producto(nombre, precio, informacionAdicional, fechaIngreso);
-					Inventario.agregarAlInventario(producto);
+					Inventario.agregarProducto(producto);
 				}
 			}
 			System.out.println("Inventario cargado desde el archivo CSV.");
@@ -45,6 +46,24 @@ public class Datos {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			System.out.println("Error en el formato del precio en el archivo CSV.");
+			e.printStackTrace();
+		}
+	}
+
+	public static void actualizarCSV() {
+		try (FileWriter writer = new FileWriter("productos.csv", false)) {
+			for (Producto producto : Inventario.inventario.values()) {
+				writer.append(producto.getNombre())
+						.append(",")
+						.append(String.valueOf(producto.getPrecio()))
+						.append(",")
+						.append(producto.getInformacionAdicional())
+						.append(",")
+						.append(producto.getFechaIngreso())
+						.append("\n");
+			}
+		} catch (IOException e) {
+			System.out.println("Error al actualizar el archivo CSV.");
 			e.printStackTrace();
 		}
 	}

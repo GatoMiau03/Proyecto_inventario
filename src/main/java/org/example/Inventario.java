@@ -4,11 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Inventario {
-    private static Map<String, Producto> inventario = new HashMap<>();
-
-    public static void inicializarInventario() {
-        cargarInventario();
-    }
+    protected static Map<String, Producto> inventario = new HashMap<>();
 
     public static void agregarProducto(Producto producto) {
         if (!inventario.containsKey(producto.getNombre().toLowerCase())) {
@@ -23,6 +19,7 @@ public class Inventario {
     public static void eliminarProducto(String nombre) {
         if (inventario.containsKey(nombre.toLowerCase())) {
             inventario.remove(nombre.toLowerCase());
+            Datos.actualizarCSV();
             System.out.println("Producto eliminado con éxito del inventario.");
         } else {
             System.out.println("Error: No existe un producto con ese nombre en el inventario.");
@@ -45,14 +42,6 @@ public class Inventario {
             for (Producto producto : inventario.values()) {
                 System.out.println(producto);
             }
-        }
-    }
-
-    public static void agregarAlInventario(Producto producto) {
-        if (!inventario.containsKey(producto.getNombre().toLowerCase())) {
-            inventario.put(producto.getNombre().toLowerCase(), producto);
-        } else {
-            System.out.println("Error: Ya existe un producto con el mismo nombre en el inventario.");
         }
     }
 }
