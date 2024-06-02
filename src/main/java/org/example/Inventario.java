@@ -7,12 +7,20 @@ public class Inventario {
     protected static Map<String, Producto> inventario = new HashMap<>();
 
     public static void agregarProducto(Producto producto) {
+        agregarProducto(producto, true);
+    }
+
+    public static void agregarProducto(Producto producto, boolean mostrarMensaje) {
         if (!inventario.containsKey(producto.getNombre().toLowerCase())) {
             inventario.put(producto.getNombre().toLowerCase(), producto);
             Datos.guardarProductoEnCSV(producto);
-            System.out.println("Producto agregado con éxito al inventario.");
+            if (mostrarMensaje) {
+                System.out.println("Producto agregado con éxito al inventario.");
+            }
         } else {
-            System.out.println("Error: Ya existe un producto con el mismo nombre en el inventario.");
+            if (mostrarMensaje) {
+                System.out.println("Error: Ya existe un producto con el mismo nombre en el inventario.");
+            }
         }
     }
 

@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 public class Datos {
 
@@ -37,7 +36,7 @@ public class Datos {
 					String informacionAdicional = campos[2];
 					String fechaIngreso = campos[3];
 					Producto producto = new Producto(nombre, precio, informacionAdicional, fechaIngreso);
-					Inventario.agregarProducto(producto);
+					Inventario.agregarProducto(producto, false);
 				}
 			}
 			System.out.println("Inventario cargado desde el archivo CSV.");
