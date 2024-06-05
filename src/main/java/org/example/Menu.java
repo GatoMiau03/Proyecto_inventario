@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Menu {
     public static void mostrarMenu(Usuario usuario) {
-        Inventario.cargarInventario();  // Cargar inventario al inicio
+        Datos.asegurarArchivoCSV();
+        Inventario.cargarInventario();
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
 

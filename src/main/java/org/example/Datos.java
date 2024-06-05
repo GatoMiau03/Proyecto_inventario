@@ -1,11 +1,21 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Datos {
+
+	public static void asegurarArchivoCSV() {
+		File archivoCSV = new File("productos.csv");
+		if (!archivoCSV.exists()) {
+			try {
+				archivoCSV.createNewFile();
+				System.out.println("Archivo productos.csv creado.");
+			} catch (IOException e) {
+				System.out.println("Error al crear el archivo productos.csv.");
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public static void guardarProductoEnCSV(Producto producto) {
 		try (FileWriter writer = new FileWriter("productos.csv", true)) {

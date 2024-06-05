@@ -47,8 +47,14 @@ public class Inventario {
             System.out.println("El inventario está vacío.");
         } else {
             System.out.println("Inventario completo:");
+            System.out.printf("%-20s %-10s %-20s %-15s%n", "Nombre", "Precio", "Información Adicional", "Fecha de Ingreso");
+            System.out.println("------------------------------------------------------------------------------------");
             for (Producto producto : inventario.values()) {
-                System.out.println(producto);
+                System.out.printf("%-20s %-10d %-20s %-15s%n",
+                        producto.getNombre(),
+                        (int) producto.getPrecio(),
+                        producto.getInformacionAdicional(),
+                        producto.getFechaIngreso());
             }
         }
     }
