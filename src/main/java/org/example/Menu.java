@@ -35,8 +35,14 @@ public class Menu {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Nombre del producto: ");
-                    String nombre = scanner.nextLine();
+                    String nombre;
+                    do {
+                        System.out.print("Nombre del producto: ");
+                        nombre = scanner.nextLine();
+                        if (!Validacion.validarNombre(nombre)) {
+                            System.out.println("Error: El nombre no puede estar vacío.");
+                        }
+                    } while (!Validacion.validarNombre(nombre));
 
                     String precioStr;
                     double precio = 0;
@@ -54,7 +60,6 @@ public class Menu {
 
                     System.out.print("Información adicional del producto: ");
                     String infoAdicional = scanner.nextLine();
-
                     String fechaIngreso = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
                     String cantidadStr;
@@ -75,7 +80,7 @@ public class Menu {
                     Inventario.agregarProducto(nuevoProducto);
                     break;
                 case 2:
-                    System.out.print("Nombre del producto a eliminar: ");
+                    System.out.print("nombre del producto a eliminar: ");
                     nombre = scanner.nextLine();
                     Inventario.eliminarProducto(nombre);
                     break;
@@ -85,19 +90,8 @@ public class Menu {
                 case 4:
                     System.out.print("Nombre del producto: ");
                     nombre = scanner.nextLine();
-                    cantidadStr = "";
-                    cantidad = 0;
-                    cantidadValida = false;
-                    while (!cantidadValida) {
-                        System.out.print("Cantidad a quitar: ");
-                        cantidadStr = scanner.nextLine();
-                        if (Validacion.validarEntero(cantidadStr)) {
-                            cantidad = Integer.parseInt(cantidadStr);
-                            cantidadValida = true;
-                        } else {
-                            System.out.println("Error: Por favor, ingrese un número válido para la cantidad a quitar.");
-                        }
-                    }
+                    System.out.print("Cantidad a quitar: ");
+                    cantidad = Integer.parseInt(scanner.nextLine());
                     Inventario.quitarCantidadProducto(nombre, cantidad);
                     break;
                 case 5:
