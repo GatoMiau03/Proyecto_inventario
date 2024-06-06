@@ -49,7 +49,7 @@ public class Menu {
                     Inventario.agregarProducto(nuevoProducto);
                     break;
                 case 2:
-                    System.out.print("Nombre del producto a eliminar: ");
+                    System.out.print("nombre del producto a eliminar: ");
                     nombre = scanner.nextLine();
                     Inventario.eliminarProducto(nombre);
                     break;
