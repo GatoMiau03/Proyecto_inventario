@@ -5,12 +5,14 @@ public class Producto {
 	private double precio;
 	private String informacionAdicional;
 	private String fechaIngreso;
+	private int cantidad;
 
-	public Producto(String nombre, double precio, String informacionAdicional, String fechaIngreso) {
+	public Producto(String nombre, double precio, String informacionAdicional, String fechaIngreso, int cantidad) {
 		this.nombre = nombre.toLowerCase();
 		this.precio = precio;
 		this.informacionAdicional = informacionAdicional;
 		this.fechaIngreso = fechaIngreso;
+		this.cantidad = cantidad;
 	}
 
 	public String getNombre() {
@@ -29,6 +31,14 @@ public class Producto {
 		return fechaIngreso;
 	}
 
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+
 	@Override
 	public String toString() {
 		return "Producto{" +
@@ -36,6 +46,7 @@ public class Producto {
 				", precio=" + precio +
 				", informacionAdicional='" + informacionAdicional + '\'' +
 				", fechaIngreso='" + fechaIngreso + '\'' +
+				", cantidad=" + cantidad +
 				'}';
 	}
 }

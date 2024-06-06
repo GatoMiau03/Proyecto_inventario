@@ -18,8 +18,11 @@ public class Inventario {
                 System.out.println("Producto agregado con éxito al inventario.");
             }
         } else {
+            Producto existente = inventario.get(producto.getNombre().toLowerCase());
+            existente.setCantidad(existente.getCantidad() + producto.getCantidad());
+            Datos.actualizarCSV();
             if (mostrarMensaje) {
-                System.out.println("Error: Ya existe un producto con el mismo nombre en el inventario.");
+                System.out.println("La cantidad del producto ha sido actualizada.");
             }
         }
     }
@@ -47,15 +50,38 @@ public class Inventario {
             System.out.println("El inventario está vacío.");
         } else {
             System.out.println("Inventario completo:");
-            System.out.printf("%-20s %-10s %-20s %-15s%n", "Nombre", "Precio", "Información Adicional", "Fecha de Ingreso");
-            System.out.println("------------------------------------------------------------------------------------");
+            System.out.printf("%-20s %-10s %-20s %-15s %-10s%n", "Nombre", "Precio", "Información Adicional", "Fecha de Ingreso", "Cantidad");
+            System.out.println("--------------------------------------------------------------------------------------------");
             for (Producto producto : inventario.values()) {
-                System.out.printf("%-20s %-10d %-20s %-15s%n",
+                System.out.printf("%-20s %-10d %-20s %-15s %-10d%n",
                         producto.getNombre(),
                         (int) producto.getPrecio(),
                         producto.getInformacionAdicional(),
-                        producto.getFechaIngreso());
+                        producto.getFechaIngreso(),
+                        producto.getCantidad());
             }
+        }
+    }
+
+    public static void quitarCantidadProducto(String nombre, int cantidad) {
+        try {
+            if (!inventario.containsKey(nombre.toLowerCase())) {
+                throw new Exception("Error: No existe un producto con ese nombre en el inventario.");
+            }
+
+            Producto producto = inventario.get(nombre.toLowerCase());
+            if (producto.getCantidad() < cantidad) {
+                throw new Exception("Error: No hay suficiente cantidad del producto en el inventario.");
+            }
+
+            producto.setCantidad(producto.getCantidad() - cantidad);
+            if (producto.getCantidad() == 0) {
+                inventario.remove(nombre.toLowerCase());
+            }
+            Datos.actualizarCSV();
+            System.out.println("Cantidad del producto actualizada con éxito.");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }

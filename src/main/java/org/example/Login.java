@@ -8,7 +8,6 @@ public class Login {
 	private static Map<String, Usuario> usuarios = new HashMap<>();
 
 	static {
-		// Usuarios por defecto
 		usuarios.put("gestor", new Usuario("gestor", "gestor123", Rol.GESTOR_DE_VENTAS));
 		usuarios.put("admin", new Usuario("admin", "admin123", Rol.ADMINISTRADOR));
 	}
