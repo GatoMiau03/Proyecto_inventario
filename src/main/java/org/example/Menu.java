@@ -41,8 +41,7 @@ public class Menu {
                     double precio = Double.parseDouble(scanner.nextLine());
                     System.out.print("Información adicional del producto: ");
                     String infoAdicional = scanner.nextLine();
-                    System.out.print("Fecha de ingreso del producto (dd/mm/yyyy): ");
-                    String fechaIngreso = scanner.nextLine();
+                    String fechaIngreso = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
                     System.out.print("Cantidad del producto: ");
                     int cantidad = Integer.parseInt(scanner.nextLine());
 
