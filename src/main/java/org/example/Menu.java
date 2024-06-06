@@ -37,19 +37,45 @@ public class Menu {
                 case 1:
                     System.out.print("Nombre del producto: ");
                     String nombre = scanner.nextLine();
-                    System.out.print("Precio del producto: ");
-                    double precio = Double.parseDouble(scanner.nextLine());
+
+                    String precioStr;
+                    double precio = 0;
+                    boolean precioValido = false;
+                    while (!precioValido) {
+                        System.out.print("Precio del producto: ");
+                        precioStr = scanner.nextLine();
+                        if (Validacion.validarNumero(precioStr)) {
+                            precio = Double.parseDouble(precioStr);
+                            precioValido = true;
+                        } else {
+                            System.out.println("Error: Por favor, ingrese un número válido para el precio.");
+                        }
+                    }
+
                     System.out.print("Información adicional del producto: ");
                     String infoAdicional = scanner.nextLine();
+
                     String fechaIngreso = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                    System.out.print("Cantidad del producto: ");
-                    int cantidad = Integer.parseInt(scanner.nextLine());
+
+                    String cantidadStr;
+                    int cantidad = 0;
+                    boolean cantidadValida = false;
+                    while (!cantidadValida) {
+                        System.out.print("Cantidad del producto: ");
+                        cantidadStr = scanner.nextLine();
+                        if (Validacion.validarEntero(cantidadStr)) {
+                            cantidad = Integer.parseInt(cantidadStr);
+                            cantidadValida = true;
+                        } else {
+                            System.out.println("Error: Por favor, ingrese un número válido para la cantidad.");
+                        }
+                    }
 
                     Producto nuevoProducto = new Producto(nombre, precio, infoAdicional, fechaIngreso, cantidad);
                     Inventario.agregarProducto(nuevoProducto);
                     break;
                 case 2:
-                    System.out.print("nombre del producto a eliminar: ");
+                    System.out.print("Nombre del producto a eliminar: ");
                     nombre = scanner.nextLine();
                     Inventario.eliminarProducto(nombre);
                     break;
@@ -59,8 +85,19 @@ public class Menu {
                 case 4:
                     System.out.print("Nombre del producto: ");
                     nombre = scanner.nextLine();
-                    System.out.print("Cantidad a quitar: ");
-                    cantidad = Integer.parseInt(scanner.nextLine());
+                    cantidadStr = "";
+                    cantidad = 0;
+                    cantidadValida = false;
+                    while (!cantidadValida) {
+                        System.out.print("Cantidad a quitar: ");
+                        cantidadStr = scanner.nextLine();
+                        if (Validacion.validarEntero(cantidadStr)) {
+                            cantidad = Integer.parseInt(cantidadStr);
+                            cantidadValida = true;
+                        } else {
+                            System.out.println("Error: Por favor, ingrese un número válido para la cantidad a quitar.");
+                        }
+                    }
                     Inventario.quitarCantidadProducto(nombre, cantidad);
                     break;
                 case 5:

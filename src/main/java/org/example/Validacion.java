@@ -6,9 +6,18 @@ public class Validacion {
         return nombre != null && !nombre.trim().isEmpty();
     }
 
-    public static boolean validarPrecio(String precio) {
+    public static boolean validarNumero(String numero) {
         try {
-            Double.parseDouble(precio);
+            Double.parseDouble(numero);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean validarEntero(String numero) {
+        try {
+            Integer.parseInt(numero);
             return true;
         } catch (NumberFormatException e) {
             return false;
