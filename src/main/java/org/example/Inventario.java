@@ -61,6 +61,9 @@ public class Inventario {
 
     public static void quitarCantidadProducto(String nombre, int cantidad) {
         try {
+            if (cantidad <= 0) {
+                throw new IllegalArgumentException("La cantidad debe ser un entero positivo mayor a 0.");
+            }
             if (!inventario.containsKey(nombre.toLowerCase())) {
                 throw new Exception("Error: No existe un producto con ese nombre en el inventario.");
             }
@@ -76,6 +79,28 @@ public class Inventario {
             }
             Datos.actualizarCSV();
             System.out.println("Cantidad del producto actualizada con éxito.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void aumentarCantidadProducto(String nombre, int cantidad) {
+        try {
+            if (cantidad <= 0) {
+                throw new IllegalArgumentException("La cantidad debe ser un entero positivo mayor a 0.");
+            }
+            if (!inventario.containsKey(nombre.toLowerCase())) {
+                throw new Exception("Error: No existe un producto con ese nombre en el inventario.");
+            }
+
+            Producto producto = inventario.get(nombre.toLowerCase());
+            producto.setCantidad(producto.getCantidad() + cantidad);
+            Datos.actualizarCSV();
+            System.out.println("Cantidad del producto aumentada con éxito.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

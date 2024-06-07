@@ -16,12 +16,13 @@ public class Menu {
             System.out.println("2. Eliminar Producto");
             System.out.println("3. Mostrar Inventario");
             System.out.println("4. Quitar Cantidad de Producto");
+            System.out.println("5. Aumentar Cantidad de Producto");
             if (usuario.getRol() == Rol.ADMINISTRADOR) {
-                System.out.println("5. Agregar Vendedor");
-                System.out.println("6. Eliminar Vendedor");
-                System.out.println("7. Salir");
+                System.out.println("6. Agregar Vendedor");
+                System.out.println("7. Eliminar Vendedor");
+                System.out.println("8. Salir");
             } else {
-                System.out.println("5. Salir");
+                System.out.println("6. Salir");
             }
             System.out.print("Seleccione una opción: ");
 
@@ -47,18 +48,21 @@ public class Menu {
                     quitarCantidadProducto(scanner);
                     break;
                 case 5:
+                    aumentarCantidadProducto(scanner);
+                    break;
+                case 6:
                     if (usuario.getRol() == Rol.ADMINISTRADOR) {
                         agregarVendedor(scanner);
                     } else {
                         salir = true;
                     }
                     break;
-                case 6:
+                case 7:
                     if (usuario.getRol() == Rol.ADMINISTRADOR) {
                         eliminarVendedor(scanner);
                     }
                     break;
-                case 7:
+                case 8:
                     salir = true;
                     break;
                 default:
@@ -101,11 +105,11 @@ public class Menu {
         while (!cantidadValida) {
             System.out.print("Cantidad del producto: ");
             cantidadStr = scanner.nextLine();
-            if (Validacion.validarEntero(cantidadStr)) {
+            if (Validacion.validarEnteroPositivo(cantidadStr)) {
                 cantidad = Integer.parseInt(cantidadStr);
                 cantidadValida = true;
             } else {
-                System.out.println("Error: Por favor, ingrese un número válido para la cantidad.");
+                System.out.println("Error: Por favor, ingrese un número válido y positivo para la cantidad.");
             }
         }
 
@@ -123,8 +127,26 @@ public class Menu {
         System.out.print("Nombre del producto: ");
         String nombre = scanner.nextLine();
         System.out.print("Cantidad a quitar: ");
-        int cantidad = Integer.parseInt(scanner.nextLine());
-        Inventario.quitarCantidadProducto(nombre, cantidad);
+        String cantidadStr = scanner.nextLine();
+        if (Validacion.validarEnteroPositivo(cantidadStr)) {
+            int cantidad = Integer.parseInt(cantidadStr);
+            Inventario.quitarCantidadProducto(nombre, cantidad);
+        } else {
+            System.out.println("Error: Por favor, ingrese un número válido y positivo para la cantidad.");
+        }
+    }
+
+    private static void aumentarCantidadProducto(Scanner scanner) {
+        System.out.print("Nombre del producto: ");
+        String nombre = scanner.nextLine();
+        System.out.print("Cantidad a aumentar: ");
+        String cantidadStr = scanner.nextLine();
+        if (Validacion.validarEnteroPositivo(cantidadStr)) {
+            int cantidad = Integer.parseInt(cantidadStr);
+            Inventario.aumentarCantidadProducto(nombre, cantidad);
+        } else {
+            System.out.println("Error: Por favor, ingrese un número válido y positivo para la cantidad.");
+        }
     }
 
     private static void agregarVendedor(Scanner scanner) {

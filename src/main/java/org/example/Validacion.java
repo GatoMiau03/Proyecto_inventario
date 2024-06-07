@@ -28,6 +28,14 @@ public class Validacion {
         }
     }
 
+    public static boolean validarEnteroPositivo(String numero) {
+        if (validarEntero(numero)) {
+            int valor = Integer.parseInt(numero);
+            return valor > 0;
+        }
+        return false;
+    }
+
     public static Usuario autenticarUsuario(Map<String, Usuario> usuarios) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nombre de usuario: ");
