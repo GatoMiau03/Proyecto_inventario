@@ -37,10 +37,6 @@ public class Inventario {
         }
     }
 
-    public static Producto obtenerProducto(String nombre) {
-        return inventario.get(nombre.toLowerCase());
-    }
-
     public static void cargarInventario() {
         Datos.cargarInventarioDesdeCSV();
     }

@@ -6,14 +6,19 @@ import java.util.Map;
 
 public class Datos {
 
-	public static void asegurarArchivoCSV() {
-		File archivoCSV = new File("productos.csv");
+	public static void asegurarArchivosCSV() {
+		asegurarArchivoCSV("productos.csv");
+		asegurarArchivoCSV("usuarios.csv");
+	}
+
+	private static void asegurarArchivoCSV(String nombreArchivo) {
+		File archivoCSV = new File(nombreArchivo);
 		if (!archivoCSV.exists()) {
 			try {
 				archivoCSV.createNewFile();
-				System.out.println("Archivo productos.csv creado.");
+				System.out.println("Archivo " + nombreArchivo + " creado.");
 			} catch (IOException e) {
-				System.out.println("Error al crear el archivo productos.csv.");
+				System.out.println("Error al crear el archivo " + nombreArchivo + ".");
 				e.printStackTrace();
 			}
 		}
@@ -90,6 +95,68 @@ public class Datos {
 			}
 		} catch (IOException e) {
 			System.out.println("Error al actualizar el archivo CSV.");
+			e.printStackTrace();
+		}
+	}
+
+	public static void guardarUsuarioEnCSV(Usuario usuario) {
+		try (FileWriter writer = new FileWriter("usuarios.csv", true)) {
+			writer.append(usuario.getNombre())
+					.append(",")
+					.append(usuario.getContrasena())
+					.append(",")
+					.append(usuario.getRol().name())
+					.append("\n");
+		} catch (IOException e) {
+			System.out.println("Error al guardar el usuario en el archivo CSV.");
+			e.printStackTrace();
+		}
+	}
+
+	public static Map<String, Usuario> cargarUsuariosDesdeCSV() {
+		String archivoCSV = "usuarios.csv";
+		String linea;
+		Map<String, Usuario> usuariosTemp = new HashMap<>();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(archivoCSV))) {
+			while ((linea = reader.readLine()) != null) {
+				String[] campos = linea.split(",");
+				if (campos.length == 3) {
+					String nombre = campos[0];
+					String contrasena = campos[1];
+					Rol rol = null;
+					try {
+						rol = Rol.valueOf(campos[2].toUpperCase());
+					} catch (IllegalArgumentException e) {
+						System.out.println("Error: Rol no válido en el archivo CSV para el usuario " + nombre);
+					}
+
+					if (rol != null) {
+						Usuario usuario = new Usuario(nombre, contrasena, rol);
+						usuariosTemp.put(nombre, usuario);
+					}
+				}
+			}
+		} catch (IOException e) {
+			System.out.println("Error al cargar los usuarios desde el archivo CSV.");
+			e.printStackTrace();
+		}
+
+		return usuariosTemp;
+	}
+
+	public static void actualizarUsuariosCSV(Map<String, Usuario> usuarios) {
+		try (FileWriter writer = new FileWriter("usuarios.csv", false)) {
+			for (Usuario usuario : usuarios.values()) {
+				writer.append(usuario.getNombre())
+						.append(",")
+						.append(usuario.getContrasena())
+						.append(",")
+						.append(usuario.getRol().name())
+						.append("\n");
+			}
+		} catch (IOException e) {
+			System.out.println("Error al actualizar el archivo CSV de usuarios.");
 			e.printStackTrace();
 		}
 	}

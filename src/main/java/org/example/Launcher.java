@@ -2,6 +2,7 @@ package org.example;
 
 public class Launcher {
     public static void main(String[] args) {
+        Datos.asegurarArchivosCSV();
         Usuario usuario = Login.autenticarUsuario();
 
         if (usuario != null) {
