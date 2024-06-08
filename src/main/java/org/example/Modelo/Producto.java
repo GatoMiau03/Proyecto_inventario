@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Modelo;
 
 public class Producto {
 	private String nombre;

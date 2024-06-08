@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Validaciones;
+
+import org.example.Usuarios.Usuario;
 
 import java.io.Console;
 import java.util.Map;
@@ -35,7 +37,6 @@ public class Validacion {
         }
         return false;
     }
-
     public static Usuario autenticarUsuario(Map<String, Usuario> usuarios) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nombre de usuario: ");

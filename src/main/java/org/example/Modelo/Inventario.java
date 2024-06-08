@@ -1,10 +1,12 @@
-package org.example;
+package org.example.Modelo;
+
+import org.example.Datos.Datos;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventario {
-    protected static Map<String, Producto> inventario = new HashMap<>();
+    public static Map<String, Producto> inventario = new HashMap<>();
 
     public static void agregarProducto(Producto producto) {
         agregarProducto(producto, true);

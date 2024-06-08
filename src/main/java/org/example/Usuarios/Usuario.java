@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Usuarios;
+
+import org.example.Usuarios.Rol;
 
 public class Usuario {
 	private String nombre;

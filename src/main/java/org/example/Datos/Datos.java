@@ -1,4 +1,9 @@
-package org.example;
+package org.example.Datos;
+
+import org.example.Modelo.Inventario;
+import org.example.Modelo.Producto;
+import org.example.Usuarios.Rol;
+import org.example.Usuarios.Usuario;
 
 import java.io.*;
 import java.util.HashMap;

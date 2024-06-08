@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Usuarios;
 
 public enum Rol {
     ADMINISTRADOR,
