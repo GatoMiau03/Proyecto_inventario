@@ -9,6 +9,7 @@ public class VentanaInicioAdmin {
     private JButton mostrarInventarioButton;
     private JButton quitarCantidadDeProductoButton;
     private JButton eliminarVendedorButton;
+    private JLabel IconoFrutas;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
