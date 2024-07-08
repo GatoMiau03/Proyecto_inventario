@@ -8,7 +8,7 @@ public class VentanaAgregarProducto {
     private JButton botonQuitarCantidadDeProducto;
     private JButton botonMostrarInventario;
     private JButton botonEliminarVendedor;
-    private JTable TablaAgregarProducto;
+    private JTable tablaAgregarProducto;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here

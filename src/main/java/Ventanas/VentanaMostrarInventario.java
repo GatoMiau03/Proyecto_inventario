@@ -8,4 +8,5 @@ public class VentanaMostrarInventario {
     private JButton botonAgregarVendedor;
     private JButton botonQuitarCantidadDeProducto;
     private JButton botonEliminarVendedor;
+    private JTable tablaMostrarInventario;
 }
