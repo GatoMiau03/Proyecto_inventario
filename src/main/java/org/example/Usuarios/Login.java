@@ -14,8 +14,18 @@ public class Login {
 		usuarios = Datos.cargarUsuariosDesdeCSV();
 	}
 
+	// Método original para autenticar usuario
 	public static Usuario autenticarUsuario() {
 		return Validacion.autenticarUsuario(usuarios);
+	}
+
+	// Nuevo método para autenticar usuario con nombre y contraseña
+	public static Usuario autenticarUsuario(String nombreUsuario, String contraseña) {
+		Usuario usuario = usuarios.get(nombreUsuario);
+		if (usuario != null && usuario.getContrasena().equals(contraseña)) {
+			return usuario;
+		}
+		return null;
 	}
 
 	public static void agregarUsuario(Usuario usuario) {

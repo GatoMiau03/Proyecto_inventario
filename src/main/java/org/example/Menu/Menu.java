@@ -7,7 +7,9 @@ import org.example.Modelo.Producto;
 import org.example.Usuarios.Rol;
 import org.example.Usuarios.Usuario;
 import org.example.Validaciones.Validacion;
-
+import org.example.Ventanas.VentanaMostrarInventario;
+import org.example.Ventanas.VentanaAgregarProducto;
+import org.example.Ventanas.VentanaEliminarProducto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -44,13 +46,13 @@ public class Menu {
 
             switch (opcion) {
                 case 1:
-                    agregarProducto(scanner);
+                    new VentanaAgregarProducto();
                     break;
                 case 2:
-                    eliminarProducto(scanner);
+                    new VentanaEliminarProducto();
                     break;
                 case 3:
-                    Inventario.mostrarInventario();
+                    new VentanaMostrarInventario();
                     break;
                 case 4:
                     quitarCantidadProducto(scanner);

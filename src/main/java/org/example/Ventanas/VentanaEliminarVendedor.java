@@ -1,12 +1,12 @@
-package Ventanas;
+package org.example.Ventanas;
 
 import javax.swing.*;
 
-public class VentanaQuitarcantidadproducto {
+public class VentanaEliminarVendedor {
     private JButton botonAgregarProducto;
     private JButton botonEliminarProducto;
     private JButton botonAgregarVendedor;
     private JButton botonMostrarInventario;
-    private JButton botonEliminarVendedor;
-    private JTable tablaQuitarCantidadDeProducto;
+    private JButton botonQuitarCantidadDeProducto;
+    private JTable tablaEliminarVendedor;
 }
