@@ -45,4 +45,9 @@ public class Login {
 			System.out.println("Error: No existe un usuario con ese nombre.");
 		}
 	}
+
+	// Método para obtener la lista de usuarios
+	public static Map<String, Usuario> obtenerUsuarios() {
+		return usuarios;
+	}
 }
