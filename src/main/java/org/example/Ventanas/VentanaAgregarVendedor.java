@@ -71,9 +71,8 @@ public class VentanaAgregarVendedor extends JFrame {
             if (!usuario.isEmpty() && !contrasena.isEmpty() && !confirmarContrasena.isEmpty()) {
                 if (contrasena.equals(confirmarContrasena)) {
                     Usuario nuevoVendedor = new Usuario(usuario, contrasena, Rol.GESTOR_DE_VENTAS);
-                    // Aquí deberías añadir la lógica para guardar la contraseña del vendedor si es necesario
                     try {
-                        Login.agregarUsuario(nuevoVendedor); // Asumiendo que Inventario tiene un método agregarUsuario
+                        Login.agregarUsuario(nuevoVendedor);
                         etiquetaResultado.setText("Vendedor agregado exitosamente.");
                     } catch (Exception ex) {
                         etiquetaResultado.setText("Error al agregar el vendedor.");

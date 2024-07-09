@@ -21,11 +21,11 @@ public class VentanaEliminarProducto extends JFrame {
         panel.add(campoNombreProducto);
 
         JButton botonEliminar = new JButton("Eliminar");
-        panel.add(new JLabel());  // Añadir un componente vacío para centrar el botón
+        panel.add(new JLabel());
         panel.add(botonEliminar);
 
         JLabel etiquetaResultado = new JLabel("", SwingConstants.CENTER);
-        panel.add(new JLabel());  // Añadir un componente vacío
+        panel.add(new JLabel());
         panel.add(etiquetaResultado);
 
         botonEliminar.addActionListener(e -> {
