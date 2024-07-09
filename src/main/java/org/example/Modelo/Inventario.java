@@ -43,24 +43,6 @@ public class Inventario {
         Datos.cargarInventarioDesdeCSV();
     }
 
-    public static void mostrarInventario() {
-        if (inventario.isEmpty()) {
-            System.out.println("El inventario está vacío.");
-        } else {
-            System.out.println("Inventario completo:");
-            System.out.printf("%-20s %-10s %-20s %-15s %-10s%n", "Nombre", "Precio", "Información Adicional", "Fecha de Ingreso", "Cantidad");
-            System.out.println("--------------------------------------------------------------------------------------------");
-            for (Producto producto : inventario.values()) {
-                System.out.printf("%-20s %-10d %-20s %-15s %-10d%n",
-                        producto.getNombre(),
-                        (int) producto.getPrecio(),
-                        producto.getInformacionAdicional(),
-                        producto.getFechaIngreso(),
-                        producto.getCantidad());
-            }
-        }
-    }
-
     public static void quitarCantidadProducto(String nombre, int cantidad) {
         try {
             if (cantidad <= 0) {
