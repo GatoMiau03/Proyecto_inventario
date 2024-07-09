@@ -8,45 +8,46 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VentanaDeLogin extends JFrame {
-    private JTextField campoUsuario;
-    private JPasswordField campoContraseña;
-
     public VentanaDeLogin() {
         setTitle("Login");
-        setSize(300, 200);
+        setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        JPanel panelPrincipal = new JPanel(new GridLayout(3, 2));
-        add(panelPrincipal);
+        JPanel panel = new JPanel(new GridLayout(3, 2));
+        add(panel);
 
-        panelPrincipal.add(new JLabel("Usuario:"));
-        campoUsuario = new JTextField();
-        panelPrincipal.add(campoUsuario);
+        JLabel usuarioLabel = new JLabel("Usuario:");
+        JTextField usuarioField = new JTextField();
+        JLabel contrasenaLabel = new JLabel("Contraseña:");
+        JPasswordField contrasenaField = new JPasswordField();
 
-        panelPrincipal.add(new JLabel("Contraseña:"));
-        campoContraseña = new JPasswordField();
-        panelPrincipal.add(campoContraseña);
+        JButton loginButton = new JButton("Login");
+        loginButton.addActionListener(e -> {
+            String nombreUsuario = usuarioField.getText();
+            String contraseña = new String(contrasenaField.getPassword());
+            Usuario usuarioAutenticado = Login.autenticarUsuario(nombreUsuario, contraseña);
 
-        JButton botonLogin = new JButton("Login");
-        panelPrincipal.add(botonLogin);
-
-        botonLogin.addActionListener(e -> {
-            String nombreUsuario = campoUsuario.getText();
-            String contraseña = new String(campoContraseña.getPassword());
-
-            Usuario usuario = Login.autenticarUsuario(nombreUsuario, contraseña);
-            if (usuario != null) {
-                JOptionPane.showMessageDialog(this, "Login exitoso");
-                dispose();
-                if (usuario.getRol() == Rol.ADMINISTRADOR) {
-                    new VentanaInicioAdmin(usuario);
+            if (usuarioAutenticado != null) {
+                if (usuarioAutenticado.getRol() == Rol.ADMINISTRADOR) {
+                    new VentanaInicioAdmin(usuarioAutenticado);
+                } else if (usuarioAutenticado.getRol() == Rol.GESTOR_DE_VENTAS) {
+                    new VentanaInicioGestor(usuarioAutenticado);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Rol desconocido: " + usuarioAutenticado.getRol());
                 }
-                // Aquí puedes agregar otras ventanas para diferentes roles si es necesario
+                this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+                JOptionPane.showMessageDialog(this, "Autenticación fallida.");
             }
         });
+
+        panel.add(usuarioLabel);
+        panel.add(usuarioField);
+        panel.add(contrasenaLabel);
+        panel.add(contrasenaField);
+        panel.add(new JLabel());
+        panel.add(loginButton);
 
         setVisible(true);
     }
